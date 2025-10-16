@@ -1,9 +1,12 @@
-import { connection } from "next/server";
+import { mongoDBConnect } from "@/lib/mongodbConnect";
 
 export async function GET() {
-  const conection = await mongoDBConnect();
+  const databaseConnection = await mongoDBConnect();
 
-  const data = await connection.collection("firstDB").find({}).toArray();
+  const data = await databaseConnection
+    .collection("firstDB")
+    .find({})
+    .toArray();
 
   return Response.json(data);
 }
